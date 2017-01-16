@@ -1,0 +1,45 @@
+hive> CREATE DATABASE IF NOT EXISTS EMPLOYEE;
+OK
+Time taken: 0.103 seconds
+hive> USE EMPLOYEE;
+OK
+Time taken: 0.037 seconds
+
+hive> set hive.cli.print.current.db=true;
+
+hive (EMPLOYEE)> CREATE TABLE EMPLOYEE (EMP_NAME STRING,TECHNOLOGY STRING, SOME_NUM INT,LOCATION STRING) ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' LINES TERMINATED BY '\n';
+
+hive (EMPLOYEE)> DESCRIBE EMPLOYEE;
+OK
+emp_name            	string              	                    
+technology          	string              	                    
+some_num            	int                 	                    
+location            	string              	                    
+Time taken: 0.139 seconds, Fetched: 4 row(s)
+
+hive (EMPLOYEE)> LOAD DATA LOCAL INPATH '/home/acadgild/Onkar/Session15/emp_details.txt' INTO TABLE EMPLOYEE;
+
+hive (EMPLOYEE)> SELECT * FROM EMPLOYEE;
+OK
+Amit	Big Data	1	BBSR
+Venkat	Web Technology	2	BBSR
+Aditya	DBA	1	BNG
+Ravinder	Java	2	BBSR
+Sunil	C#	1	BBSR
+Anil	ASP	2	BNG
+Mihir	Big Data	3	BBSR
+Mohit	Java	1	BBSR
+Time taken: 0.039 seconds, Fetched: 8 row(s)
+
+
+hive (EMPLOYEE)> SELECT TECHNOLOGY, COUNT(EMP_NAME) FROM EMPLOYEE GROUP BY TECHNOLOGY;
+
+ASP	1
+Big Data	2
+C#	1
+DBA	1
+Java	2
+Web Technology	1
+Time taken: 31.184 seconds, Fetched: 6 row(s)
+hive (EMPLOYEE)> 
+
